@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link href="../../_app/immutable/entry/start.D7szhBR7.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/DJSqOGub.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/W8JXJZ79.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/app.ZVHzWSS7.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/xihTtKlq.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/0.C46UDYLG.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/5.CgU0ax5S.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/Cwwqtm74.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/DooIRhXB.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/C9yY574e.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CrgYNgkp.js" rel="modulepreload">
+		<!--e2jw2j--><!----><title>#4471 · three problems, not one · support kb</title>
+		<link href="../../_app/immutable/assets/runbook.COyw0cbZ.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/Callout.AbLv9dM_.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/CauseTable.DuKfINX_.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/_page.LKJlaEsV.css" rel="stylesheet"></head>
+  <body><div style="display: contents"><!--[--><!--[0--><!--[--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 · three problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Nosibb</b></span> <span class="status proposed svelte-e2jw2j">proposed</span> <span class="svelte-e2jw2j">reviewed 2026-11-12 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> is marked known: one issue, one fix queued. Its own table already says
+otherwise, and the reports say more. #4471 holds three problems. Each one now has a ticket of its own.</p> <aside class="warn svelte-17bri61"><!---->The queued parser fix does not close #4471. It leaves the booking-v3 form hint and the one-day moves.<!----></aside><!----> <h2>One ticket per problem</h2> <p class="sum svelte-xskqqx"><strong>412</strong> reports in #4471 (427 rows in the export; 15 are the same report twice) · <strong>3</strong> problems · one ticket each</p> <table><thead><tr><th>problem</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th></tr></thead><tbody><!--[--><tr><td><code>parser</code> Shared parser reads day-first dates month first<br/><span class="what svelte-xskqqx">Day and month swap: 7 April comes out as 4 July. Every day-first tenant, app and email, and the booking-v2 form.</span></td><td>374</td><td>11</td><td>2026-04-01 → 2026-10-04</td><td><!--[0--><a href="https://github.com/Nosibb/s01e03-what-it-shows/issues/1">#1</a><!--]--></td></tr><tr><td><code>hint</code> booking-v3 form hints MM/DD/YYYY but reads the tenant’s day first<br/><span class="what svelte-xskqqx">People type what the hint tells them, month first; the form reads it day first. Only the form channel of booking-v3 tenants.</span></td><td>33</td><td>3</td><td>2026-04-17 → 2026-09-22</td><td><!--[0--><a href="https://github.com/Nosibb/s01e03-what-it-shows/issues/2">#2</a><!--]--></td></tr><tr><td><code>one-day</code> Dates move by one day, not flipped<br/><span class="what svelte-xskqqx">Tuesday shows as Monday; the same meeting lands on different days in Lisbon and Toronto. Looks like a time-zone bug, not a parser one.</span></td><td>5</td><td>5</td><td>2026-04-02 → 2026-10-04</td><td><!--[0--><a href="https://github.com/Nosibb/s01e03-what-it-shows/issues/3">#3</a><!--]--></td></tr><!--]--></tbody></table><!----> <h2>How each report was placed</h2> <ol><li><strong>One id, one report.</strong> The export pages overlap, so some reports appear twice. Each is counted once.</li> <li><strong>The tenant decides the cause, not intake.</strong> <code>intakeTag</code> is a guess from the reporter’s browser.
+The cause comes from the tenant’s locale and booking form (<code>src/lib/kb/causes.ts</code>).</li> <li><strong>Read the body.</strong> The reports the desk noted as a one-day move (<code>desk-notes.json</code>) show a date
+shifted by one day, not a day and month swapped. They are their own problem, not <code>parser</code>.</li></ol> <h2>What the desk’s table showed</h2> <p class="sum svelte-12oyimm"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr></thead><tbody><!--[--><tr class="svelte-12oyimm"><td class="svelte-12oyimm"><code>parser</code></td><td class="svelte-12oyimm">379</td><td class="tags svelte-12oyimm">parser ×356 · hint ×23</td><td class="svelte-12oyimm">11</td><td class="svelte-12oyimm">2026-04-01 → 2026-10-04</td><td class="svelte-12oyimm">#4471</td></tr><tr class="svelte-12oyimm wrong"><td class="svelte-12oyimm"><code>hint</code></td><td class="svelte-12oyimm">33</td><td class="tags svelte-12oyimm">hint ×18 · parser ×15</td><td class="svelte-12oyimm">3</td><td class="svelte-12oyimm">2026-04-17 → 2026-09-22</td><td class="svelte-12oyimm">not this ticket — no ticket of its own</td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-12oyimm">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[-1--><!--]--><!--]--><!----> <h2>Lessons</h2> <ul><li>A matching subject line does not mean the same bug (<a href="/kb/decisions/0001-dedupe-by-subject">0001</a>).
+Several problems were merged into one ticket.</li> <li>When a table on the page disagrees with the words on the page, trust the table and re-read the words.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-AWR2-72PE</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_iz62t6 = {
+						base: new URL("../..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../_app/immutable/entry/start.D7szhBR7.js"),
+						import("../../_app/immutable/entry/app.ZVHzWSS7.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 5],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div></body>
+</html>
