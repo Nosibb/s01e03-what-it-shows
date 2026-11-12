@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 · three problems, not one'
+title: '#4471 · two problems, not one'
 owner: Nosibb
 status: proposed
 reviewed: 2026-11-12
@@ -14,14 +14,14 @@ signature: Nosibb
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 
   const repo = 'https://github.com/Nosibb/s01e03-what-it-shows/issues';
-  const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+  const tickets = { parser: `${repo}/1`, hint: `${repo}/2` };
 </script>
 
 [#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. Its own table already says
-otherwise, and the reports say more. #4471 holds three problems. Each one now has a ticket of its own.
+otherwise. #4471 holds two problems. Each one now has a ticket of its own.
 
 <Callout kind="warn">
-The queued parser fix does not close #4471. It leaves the booking-v3 form hint and the one-day moves.
+The queued parser fix does not close #4471. It leaves the booking-v3 form hint, which had no ticket.
 </Callout>
 
 ## One ticket per problem
@@ -33,9 +33,8 @@ The queued parser fix does not close #4471. It leaves the booking-v3 form hint a
 1. **One id, one report.** The export pages overlap, so some reports appear twice. Each is counted once.
 2. **The tenant decides the cause, not intake.** `intakeTag` is a guess from the reporter's browser.
    The cause comes from the tenant's locale and booking form (`src/lib/kb/causes.ts`).
-3. **Read the body.** The reports the desk noted as a one-day move (`desk-notes.json`) show a date
-   shifted by one day, not a day and month swapped. They stay counted under `parser`, where the desk
-   files them by tenant, and they get a ticket of their own.
+3. **One-day moves stay where they are filed.** The desk read a few reports as a one-day move
+   (`desk-notes.json`). They are counted under `parser`, where the tenant files them, and footnoted there.
 
 ## What the desk's table showed
 

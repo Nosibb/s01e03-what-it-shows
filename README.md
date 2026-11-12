@@ -1,13 +1,12 @@
 # S01E03 · what it shows
 
 The support desk merged 412 reports about dates into one ticket, #4471, and marked it known.
-#4471 holds three problems. Each has one ticket (GitHub issue) here, with how many reports it covers:
+#4471 holds two problems. Each has one ticket (GitHub issue) here, with how many reports it covers:
 
 | issue | problem | reports |
 |---|---|---|
-| [#1](../../issues/1) | shared parser reads day-first dates month first | 379 (5 of them also in #3) |
-| [#2](../../issues/2) | booking-v3 form hints `MM/DD/YYYY` but reads day first | 33 |
-| [#3](../../issues/3) | dates move by one day, not flipped | 5 |
+| [#1](../../issues/1) | `parser`: shared parser reads day-first dates month first | 379 (5 read as a one-day move, footnoted) |
+| [#2](../../issues/2) | `hint`: booking-v3 form hints `MM/DD/YYYY` but reads day first | 33 |
 | | total (unique report ids, counted the desk's way, by tenant) | 412 |
 
 ## The page
