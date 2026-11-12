@@ -34,7 +34,8 @@ The queued parser fix does not close #4471. It leaves the booking-v3 form hint a
 2. **The tenant decides the cause, not intake.** `intakeTag` is a guess from the reporter's browser.
    The cause comes from the tenant's locale and booking form (`src/lib/kb/causes.ts`).
 3. **Read the body.** The reports the desk noted as a one-day move (`desk-notes.json`) show a date
-   shifted by one day, not a day and month swapped. They are their own problem, not `parser`.
+   shifted by one day, not a day and month swapped. They stay counted under `parser`, where the desk
+   files them by tenant, and they get a ticket of their own.
 
 ## What the desk's table showed
 

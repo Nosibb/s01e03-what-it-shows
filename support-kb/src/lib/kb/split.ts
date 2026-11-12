@@ -1,6 +1,6 @@
 // One ticket per problem in a merged ticket. Builds on causes.ts and adds the problem it cannot see:
-// reports whose dates moved by one day, not flipped (desk-notes.json `oneDayMove`). The desk filed
-// those under `parser` by tenant; their bodies show a one-day shift, so they are their own problem.
+// reports whose dates moved by one day, not flipped (desk-notes.json `oneDayMove`). The desk files
+// those under `parser` by tenant; their bodies show a one-day shift, so they also get their own ticket.
 import { causeOf, uniqueById, type Report, type Tenant } from '#lib/kb/causes';
 
 export type Problem = 'parser' | 'hint' | 'one-day' | 'unplaced';
@@ -21,12 +21,18 @@ export const PROBLEMS: Record<Problem, { title: string; what: string }> = {
   unplaced: { title: 'No cause on file', what: 'Tenant unknown or writes month first.' },
 };
 
-export function problemOf(r: Report, t: Tenant | undefined, oneDayMove: readonly string[]): Problem {
-  if (oneDayMove.includes(r.id)) return 'one-day';
-  return causeOf(r, t) ?? 'unplaced';
-}
+// The desk's view, as exported: every report is counted where causes.ts files it (by tenant).
+// The one-day moves stay counted under the cause they are filed in, footnoted there, and get a
+// ticket of their own because their bodies show a different bug.
+export type ProblemRow = { problem: Problem; reports: Report[]; tenants: number; firstSeen: string; lastSeen: string; alsoIn?: Problem; readAsOneDay: number };
 
-export type ProblemRow = { problem: Problem; reports: Report[]; tenants: number; firstSeen: string; lastSeen: string };
+function row(problem: Problem, rs: Report[], oneDayMove: readonly string[], alsoIn?: Problem): ProblemRow {
+  const days = rs.map((r) => r.receivedAt.slice(0, 10)).sort();
+  return {
+    problem, reports: rs, tenants: new Set(rs.map((r) => r.tenant)).size, firstSeen: days[0], lastSeen: days[days.length - 1],
+    alsoIn, readAsOneDay: problem === 'one-day' ? 0 : rs.filter((r) => oneDayMove.includes(r.id)).length,
+  };
+}
 
 export function splitTicket(
   all: Report[],
@@ -37,14 +43,14 @@ export function splitTicket(
   const merged = uniqueById(all).filter((r) => r.mergedInto === ticket);
   const by = new Map<Problem, Report[]>();
   for (const r of merged) {
-    const p = problemOf(r, tenantOf(r), oneDayMove);
-    by.set(p, [...(by.get(p) ?? []), r]);
+    const c: Problem = causeOf(r, tenantOf(r)) ?? 'unplaced';
+    by.set(c, [...(by.get(c) ?? []), r]);
   }
-  const rows = [...by.entries()]
-    .map(([problem, rs]) => {
-      const days = rs.map((r) => r.receivedAt.slice(0, 10)).sort();
-      return { problem, reports: rs, tenants: new Set(rs.map((r) => r.tenant)).size, firstSeen: days[0], lastSeen: days[days.length - 1] };
-    })
-    .sort((a, b) => b.reports.length - a.reports.length);
+  const rows = [...by.entries()].map(([p, rs]) => row(p, rs, oneDayMove)).sort((a, b) => b.reports.length - a.reports.length);
+  const moved = merged.filter((r) => oneDayMove.includes(r.id));
+  if (moved.length) {
+    const filedIn = (causeOf(moved[0], tenantOf(moved[0])) ?? 'unplaced') as Problem;
+    rows.push(row('one-day', moved, oneDayMove, filedIn));
+  }
   return { rows, total: merged.length, rawRows: all.filter((r) => r.mergedInto === ticket).length };
 }

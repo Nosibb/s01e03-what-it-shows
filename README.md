@@ -5,10 +5,10 @@ The support desk merged 412 reports about dates into one ticket, #4471, and mark
 
 | issue | problem | reports |
 |---|---|---|
-| [#1](../../issues/1) | shared parser reads day-first dates month first | 374 |
+| [#1](../../issues/1) | shared parser reads day-first dates month first | 379 (5 of them also in #3) |
 | [#2](../../issues/2) | booking-v3 form hints `MM/DD/YYYY` but reads day first | 33 |
 | [#3](../../issues/3) | dates move by one day, not flipped | 5 |
-| | total (unique report ids) | 412 |
+| | total (unique report ids, counted the desk's way, by tenant) | 412 |
 
 ## The page
 
