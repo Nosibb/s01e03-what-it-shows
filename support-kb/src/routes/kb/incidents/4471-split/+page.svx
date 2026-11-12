@@ -4,7 +4,7 @@ title: '#4471 · two problems, not one'
 owner: Nosibb
 status: proposed
 reviewed: 2026-11-12
-signature: Nosibb
+signature: v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjQ4MDYiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5NDUyNjQ2NCwiZXhwIjoxNzk0NjEyODY0fQ.TxFgnwVhqe1h7p1LYCGeid_zfwIB_y2QPqn8nZb0UDQ
 ---
 
 <script>
