@@ -11,7 +11,7 @@ The support desk merged 412 reports about dates into one ticket, #4471, and mark
 
 ## The page
 
-- Source: [`support-kb/src/routes/kb/incidents/4471-split/+page.svx`](support-kb/src/routes/kb/incidents/4471-split/+page.svx), signed `Nosibb` (desk ref `DR-AWR2-72PE`)
+- Source: [`support-kb/src/routes/kb/incidents/4471-split/+page.svx`](support-kb/src/routes/kb/incidents/4471-split/+page.svx), signed with the course ticket (desk ref `DR-VFN3-C910`)
 - Logic: [`support-kb/src/lib/kb/split.ts`](support-kb/src/lib/kb/split.ts), [`SplitTable.svelte`](support-kb/src/lib/kb/SplitTable.svelte)
 - As the desk will see it: [`rendered/kb/incidents/4471-split.html`](rendered/kb/incidents/4471-split.html)
 
